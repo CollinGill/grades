@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = () => {
+const Header = (props) => {
     const headerStyle = {
         padding: "20px 0",
         lineHeight: "1.5em",
@@ -20,7 +20,7 @@ const Header = () => {
                     textShadow: "0px 15px 5px rgba(0,0,0,0.1), 10px 20px 5px rgba(0,0,0,0.05), -10px 20px 5px rgba(0,0,0,0.05)",
                 }}
             >
-                grades
+               {props.text} 
             </h1>
         </header>
     );

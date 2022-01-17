@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import Header from "../../components/Header.js";
+
+// Components
+import Header from "../../components/Header";
 import AppDesc from "./AppDesc.js";
 
 class LandingContainer extends Component {
@@ -7,7 +9,7 @@ class LandingContainer extends Component {
         return (
             <div className="container">
                 <div className="inner">
-                    <Header />
+                    <Header text="grades" />
                     <AppDesc />
                 </div>
             </div>
