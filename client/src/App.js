@@ -7,7 +7,7 @@ import "./App.css";
 // pages
 import LandingContainer from "./pages/landing/LandingContainer";
 import About from "./pages/about/About";
-import Login from "./pages/login/Login";
+import LoginContainer from "./pages/login/LoginContainer";
 
 const App = () => {
     return (
@@ -16,7 +16,7 @@ const App = () => {
             <Switch>
                 <Route path="/" element={<LandingContainer />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<LoginContainer />} />
             </Switch>
         </Router>
     );
