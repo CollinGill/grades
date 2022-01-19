@@ -1,20 +1,20 @@
+import { Box, Center, Container, Heading } from "@chakra-ui/react";
 import React, { Component } from "react";
 
 // Components
-import Header from "../../components/Header";
 import AppDesc from "./AppDesc.js";
 
-class LandingContainer extends Component {
-  render() {
-    return (
-      <div className="container">
-        <div className="inner">
-          <Header text="grades" />
-          <AppDesc />
-        </div>
-      </div>
-    );
-  }
-}
+const LandingContainer = () => {
+  return (
+    <Container maxW="container.lg">
+      <Center>
+        <Box mb="6rem">
+          <Heading fontSize="60px">grades</Heading>
+        </Box>
+      </Center>
+      <AppDesc />
+    </Container>
+  );
+};
 
 export default LandingContainer;
