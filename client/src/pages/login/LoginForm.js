@@ -1,56 +1,65 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Modal,
+  useDisclosure,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+} from "@chakra-ui/react";
+import PasswordInput from "./PasswordInput";
+import EmailInput from "./EmailInput";
 
-class LoginForm extends Component {
-    state = {
-        email: "",
-        password: "",
-    }
+const LoginForm = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-    onChange = e => {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
+  const noEmail = email === "";
+  const noPassword = password === "";
 
-    handleSubmit = e => {
-        e.preventDefault();
-        if (this.state.email && this.state.password) {
-            this.setState({
-                email: "",
-                password: "",
-            });
-        } else {
-            alert("No email and/or password were entered");
-        }
-    }
+  const isError = noEmail || noPassword;
 
-    render() {
-        return (
-            <form 
-                id="loginForm"
-                onSubmit={this.handleSubmit}
-                className="loginFormContainer"
-            >
-                <input 
-                    type="text"
-                    placeholder="email"
-                    name="email"
-                    className="inputField"
-                    value={this.state.email}
-                    onChange={this.onChange}
-                />
-                <input 
-                    type="password"
-                    placeholder="password"
-                    name="password"
-                    className="inputField"
-                    value={this.state.password}
-                    onChange={this.onChange}
-                />
-                <button className="loginButton">login</button>
-            </form>
-        );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // TODO: login: if incorrect login information
+    if (!isError) {
+      console.log("Email: " + email);
+      console.log("Password: " + password);
+      setEmail("");
+      setPassword("");
     }
+  };
+
+  return (
+    <form id="loginForm" onSubmit={handleSubmit}>
+      <FormControl isRequired>
+        <FormLabel htmlFor="email">Email</FormLabel>
+        <EmailInput
+          name="email"
+          variant="outline"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </FormControl>
+      <FormControl isRequired>
+        <FormLabel htmlFor="password">Password</FormLabel>
+        <PasswordInput
+          name="password"
+          variant="outline"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button colorScheme="purple" variant="ghost" width="full" type="submit">
+          login
+        </Button>
+      </FormControl>
+    </form>
+  );
 };
 
 export default LoginForm;

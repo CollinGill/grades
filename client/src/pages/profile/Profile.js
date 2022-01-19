@@ -14,7 +14,7 @@ const Profile = () => {
                 fontWeight: "600",
                 marginBottom: "2rem",
                 lineHeight: "1em",
-                color: "#ececec",
+                /*color: "#ececec",*/
                 textTransform: "lowercase",
                 textAlign: "center",
                 textShadow: "0px 15px 5px rgba(0,0,0,0.1), 10px 20px 5px rgba(0,0,0,0.05), -10px 20px 5px rgba(0,0,0,0.05)",
