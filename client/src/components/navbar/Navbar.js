@@ -7,16 +7,8 @@ import {
   useColorModeValue,
   Flex,
   Stack,
-  Menu,
-  MenuButton,
-  MenuList,
-  Center,
-  Avatar,
-  MenuDivider,
-  MenuItem,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { AiOutlineUser } from "react-icons/ai";
 
 import NavMenu from "./NavMenu";
 
@@ -46,29 +38,6 @@ const Navbar = () => {
                 <Button onClick={toggleColorMode}>
                   {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
                 </Button>
-              </Box>
-              <Box p="4" display="flex" flexGrow="1">
-                <Menu placement="right">
-                  <MenuButton
-                    as={Button}
-                    rounded={"full"}
-                    variant={"link"}
-                    cursor={"pointer"}
-                    minW={0}
-                  >
-                    <Avatar size={"sm"} src={AiOutlineUser} />
-                  </MenuButton>
-                  <MenuList alignItems={"center"}>
-                    <br />
-                    <Center>
-                      <Avatar size={"xl"} src={AiOutlineUser} />
-                    </Center>
-                    <br />
-                    <MenuDivider />
-                    <MenuItem>Account Settings</MenuItem>
-                    <MenuItem>Logout</MenuItem>
-                  </MenuList>
-                </Menu>
               </Box>
             </Stack>
           </Flex>

@@ -1,73 +1,65 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   Button,
-  ButtonGroup,
-  Input,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  FormErrorText,
+  Modal,
+  useDisclosure,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
 } from "@chakra-ui/react";
 import PasswordInput from "./PasswordInput";
 import EmailInput from "./EmailInput";
 
-class LoginForm extends Component {
-  state = {
-    email: "",
-    password: "",
-  };
+const LoginForm = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  onChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
+  const noEmail = email === "";
+  const noPassword = password === "";
 
-  handleSubmit = (e) => {
+  const isError = noEmail || noPassword;
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.email && this.state.password) {
-      this.setState({
-        email: "",
-        password: "",
-      });
-    } else {
-      alert("No email and/or password were entered");
+    // TODO: login: if incorrect login information
+    if (!isError) {
+      console.log("Email: " + email);
+      console.log("Password: " + password);
+      setEmail("");
+      setPassword("");
     }
   };
 
-  render() {
-    return (
-      <form id="loginForm" onSubmit={this.handleSubmit}>
-        <FormControl>
-          <FormLabel htmlFor="email">Email</FormLabel>
-          <EmailInput
-            name="email"
-            variant="outline"
-            value={this.state.email}
-            onChange={this.onChange}
-          />
-        </FormControl>
-        <FormControl>
-          <FormLabel htmlFor="password">Password</FormLabel>
-          <PasswordInput
-            name="password"
-            variant="outline"
-            value={this.state.password}
-            onChange={this.onChange}
-          />
-          <Button
-            colorScheme="purple"
-            variant="ghost"
-            width="full"
-            type="submit"
-          >
-            login
-          </Button>
-        </FormControl>
-      </form>
-    );
-  }
-}
+  return (
+    <form id="loginForm" onSubmit={handleSubmit}>
+      <FormControl isRequired>
+        <FormLabel htmlFor="email">Email</FormLabel>
+        <EmailInput
+          name="email"
+          variant="outline"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </FormControl>
+      <FormControl isRequired>
+        <FormLabel htmlFor="password">Password</FormLabel>
+        <PasswordInput
+          name="password"
+          variant="outline"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button colorScheme="purple" variant="ghost" width="full" type="submit">
+          login
+        </Button>
+      </FormControl>
+    </form>
+  );
+};
 
 export default LoginForm;

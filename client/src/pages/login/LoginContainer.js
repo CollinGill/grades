@@ -1,6 +1,5 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import React, { Component } from "react";
-import Header from "../../components/Header";
 import LoginForm from "./LoginForm";
 
 class LoginContainer extends Component {
