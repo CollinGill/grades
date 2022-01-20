@@ -2,13 +2,10 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
-  Input,
   CloseButton,
   FormControl,
   FormLabel,
   Button,
-  FormHelperText,
-  FormErrorMessage,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import EmailInput from "../../components/EmailInput";

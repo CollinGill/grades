@@ -1,0 +1,28 @@
+schema {
+  query: Query
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+}
+
+type UserResult {
+  success: Boolean!
+  errors: [String]
+  user: User
+}
+
+type UsersResult {
+  success: Boolean!
+  errors: [String]
+  user: [User]
+}
+
+type Query {
+  listUsers: UsersResult!
+  getUser(id: ID!): UsersResult!
+}
