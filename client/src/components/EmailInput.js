@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Input } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 
 const EmailInput = (props) => {
   return (

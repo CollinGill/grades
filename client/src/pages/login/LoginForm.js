@@ -3,21 +3,18 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Modal,
   useDisclosure,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
+  Text,
+  Box,
+  Center,
 } from "@chakra-ui/react";
-import PasswordInput from "./PasswordInput";
-import EmailInput from "./EmailInput";
+import PasswordInput from "../../components/PasswordInput";
+import EmailInput from "../../components/EmailInput";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const noEmail = email === "";
   const noPassword = password === "";
@@ -58,6 +55,17 @@ const LoginForm = () => {
           login
         </Button>
       </FormControl>
+      <Center>
+        <Text>No account?</Text>
+      </Center>
+      <br />
+      <Box>
+        <Center>
+          <Button colorScheme="purple">
+            <Link to={"/register"}>Signup/Register</Link>
+          </Button>
+        </Center>
+      </Box>
     </form>
   );
 };

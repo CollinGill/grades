@@ -14,6 +14,7 @@ import Navbar from "./components/navbar/Navbar";
 import LandingContainer from "./pages/landing/LandingContainer";
 import About from "./pages/about/About";
 import LoginContainer from "./pages/login/LoginContainer";
+import RegisterContainer from "./pages/register/RegisterContainer";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/" element={<LandingContainer />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<LoginContainer />} />
+          <Route path="/register" element={<RegisterContainer />} />
         </Switch>
       </Router>
     </ChakraProvider>
