@@ -2,7 +2,7 @@ schema {
   query: Query
 }
 
-type User {
+type Users {
   id: ID!
   firstName: String!
   lastName: String!
@@ -10,19 +10,24 @@ type User {
   password: String!
 }
 
-type UserResult {
-  success: Boolean!
-  errors: [String]
-  user: User
-}
-
 type UsersResult {
   success: Boolean!
   errors: [String]
-  user: [User]
+  users: Users
+}
+
+type UsersResultList {
+  success: Boolean!
+  errors: [String]
+  users: [Users]
+}
+
+type Hello {
+  message: String
 }
 
 type Query {
-  listUsers: UsersResult!
+  listUsers: UsersResultList!
   getUser(id: ID!): UsersResult!
+  hello: Hello!
 }
