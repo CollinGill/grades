@@ -56,10 +56,10 @@ class Query(graphene.ObjectType):
 
     def resolve_check_password(root, info, uid, password):
         password = password.encode('utf-8')
-        print(password)
         user = Users.objects.get(uid=uid)
-        print(user.password)
-        return bcrypt.checkpw(password, user.password)
+        userPassword = user.password.encode('utf-8')
+        return bcrypt.checkpw(password, userPassword)
+            
 
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
