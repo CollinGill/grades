@@ -1,6 +1,11 @@
 import graphene
 from graphene_django import DjangoObjectType
 
+import bcrypt
+import dotenv
+
+SECRET_SALT = dotenv.load_dotenv()
+
 from users.models import Users
 
 class UsersType(DjangoObjectType):
@@ -13,6 +18,7 @@ class UsersInput(graphene.InputObjectType):
     lastName = graphene.String()
     email = graphene.String()
     password = graphene.String()
+
     
 
 class CreateUser(graphene.Mutation):
@@ -27,7 +33,7 @@ class CreateUser(graphene.Mutation):
             firstName=user_data.firstName,
             lastName=user_data.lastName,
             email=user_data.email,
-            password=user_data.password,
+            password=bcrypt.hashpw(user_data.password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         )        
         user_instance.save()
         return CreateUser(user=user_instance)
@@ -35,6 +41,9 @@ class CreateUser(graphene.Mutation):
 class Query(graphene.ObjectType):
     all_users = graphene.List(UsersType)
     user_by_uid = graphene.Field(UsersType, uid=graphene.ID(required=True))
+    #check_password = graphene.Field(graphene.Boolean, uid=graphene.ID(required=True), password=graphene.String(required=True))
+    check_password = graphene.Boolean(uid=graphene.ID(required=True), password=graphene.String(required=True))
+
 
     def resolve_all_users(root, info):
         return Users.objects.all()
@@ -44,6 +53,13 @@ class Query(graphene.ObjectType):
             return Users.objects.get(uid=uid)
         except Users.DoesNotExist:
             return None
+
+    def resolve_check_password(root, info, uid, password):
+        password = password.encode('utf-8')
+        print(password)
+        user = Users.objects.get(uid=uid)
+        print(user.password)
+        return bcrypt.checkpw(password, user.password)
 
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
