@@ -37,7 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'graphene_django',
+    'graphql_playground',
+    # ------------- #
+    # - User Apps - #
+    # ------------- #
+    'users',
 ]
+
+GRAPHENE = {
+    'SCHEMA': 'schema.schema'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
