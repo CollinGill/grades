@@ -11,15 +11,13 @@ from users.models import Users
 class UsersType(DjangoObjectType):
     class Meta:
         model = Users
-        fields = ("uid", "firstName", "lastName", "email", "password")
+        fields = ("uid", "firstName", "lastName", "username", "password")
 
 class UsersInput(graphene.InputObjectType):
     firstName = graphene.String()
     lastName = graphene.String()
-    email = graphene.String()
+    username = graphene.String()
     password = graphene.String()
-
-    
 
 class CreateUser(graphene.Mutation):
     class Arguments:
@@ -32,7 +30,7 @@ class CreateUser(graphene.Mutation):
         user_instance = Users(
             firstName=user_data.firstName,
             lastName=user_data.lastName,
-            email=user_data.email,
+            username=user_data.username,
             password=bcrypt.hashpw(user_data.password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         )        
         user_instance.save()
@@ -41,8 +39,7 @@ class CreateUser(graphene.Mutation):
 class Query(graphene.ObjectType):
     all_users = graphene.List(UsersType)
     user_by_uid = graphene.Field(UsersType, uid=graphene.ID(required=True))
-    #check_password = graphene.Field(graphene.Boolean, uid=graphene.ID(required=True), password=graphene.String(required=True))
-    check_password = graphene.Boolean(uid=graphene.ID(required=True), password=graphene.String(required=True))
+    check_password = graphene.Boolean(username=graphene.String(required=True), password=graphene.String(required=True))
 
 
     def resolve_all_users(root, info):
@@ -54,11 +51,17 @@ class Query(graphene.ObjectType):
         except Users.DoesNotExist:
             return None
 
-    def resolve_check_password(root, info, uid, password):
-        password = password.encode('utf-8')
-        user = Users.objects.get(uid=uid)
-        userPassword = user.password.encode('utf-8')
-        return bcrypt.checkpw(password, userPassword)
+    def resolve_check_password(root, info, username, password):
+        try:
+            password = password.encode('utf-8')
+            user = Users.objects.get(username=username)
+            userPassword = user.password.encode('utf-8')
+            return bcrypt.checkpw(password, userPassword)
+        except Users.DoesNotExist as error:
+            print('\n\n\n')
+            print(str(error))
+            print('\n\n\n')
+            return False
             
 
 class Mutation(graphene.ObjectType):

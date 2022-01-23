@@ -9,7 +9,7 @@ const NameInput = (props) => {
       variant={props.variant}
       value={props.value}
       onChange={props.onChange}
-      placeholder="First name"
+      placeholder={props.placeholder}
       size="md"
     />
   );

@@ -21,7 +21,7 @@ const Navbar = () => {
           h={16}
           alignItems={"center"}
           justifyContent={"space-between"}
-          marginBottom={"6em"}
+          marginBottom={"3em"}
         >
           <Flex alignItems={"center"} justifyContent={"space-between"}>
             <Stack

@@ -9,7 +9,7 @@ const EmailInput = (props) => {
       variant={props.variant}
       value={props.value}
       onChange={props.onChange}
-      placeholder="Enter email"
+      placeholder="Enter username"
       size="md"
     />
   );

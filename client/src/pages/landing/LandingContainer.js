@@ -1,5 +1,5 @@
 import { Box, Center, Container, Heading } from "@chakra-ui/react";
-import React, { Component } from "react";
+import React from "react";
 
 // Components
 import AppDesc from "./AppDesc.js";

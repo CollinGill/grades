@@ -3,44 +3,59 @@ import {
   Button,
   FormControl,
   FormLabel,
-  useDisclosure,
   Text,
   Box,
   Center,
 } from "@chakra-ui/react";
 import PasswordInput from "../../components/PasswordInput";
-import EmailInput from "../../components/EmailInput";
+import UsernameInput from "../../components/UsernameInput";
 import { Link } from "react-router-dom";
+import { gql, useLazyQuery, useQuery } from "@apollo/client";
+
+const LOGIN_USER = gql`
+  query LOGIN_USER($username: String!, $password: String!) {
+    checkPassword(username: $username, password: $password)
+  }
+`;
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const noEmail = email === "";
+  const { result } = useLazyQuery(LOGIN_USER, {
+    variables: { username, password },
+  });
+
+  console.log(result);
+
+  const noUsername = username === "";
   const noPassword = password === "";
 
-  const isError = noEmail || noPassword;
+  const isError = noUsername || noPassword;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // TODO: login: if incorrect login information
-    if (!isError) {
-      console.log("Email: " + email);
+
+    if (result) {
+      console.log("Username: " + username);
       console.log("Password: " + password);
-      setEmail("");
+      setUsername("");
       setPassword("");
+    } else {
+      console.log("Nope");
     }
   };
 
   return (
     <form id="loginForm" onSubmit={handleSubmit}>
       <FormControl isRequired>
-        <FormLabel htmlFor="email">Email</FormLabel>
-        <EmailInput
-          name="email"
+        <FormLabel htmlFor="username">Username</FormLabel>
+        <UsernameInput
+          name="username"
           variant="outline"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
       </FormControl>
       <FormControl isRequired>

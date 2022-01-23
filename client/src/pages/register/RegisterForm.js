@@ -8,7 +8,6 @@ import {
   Button,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import EmailInput from "../../components/EmailInput";
 import PasswordInput from "../../components/PasswordInput";
 import NameInput from "./NameInput";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 const RegisterForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmation, setConfirmation] = useState("");
 
@@ -28,11 +27,10 @@ const RegisterForm = () => {
     e.preventDefault();
     if (passwordMatch) {
       console.log("Name: " + firstName + " " + lastName);
-      console.log("Email: " + email);
+      console.log("Username: " + username);
       console.log("Password: " + password);
       setFirstName("");
       setLastName("");
-      setEmail("");
       setPassword("");
       setConfirmation("");
       navigate("/");
@@ -46,28 +44,34 @@ const RegisterForm = () => {
         <NameInput
           name="firstName"
           variant="outline"
+          placeholder="First name"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
         />
       </FormControl>
+      <br />
       <FormControl isRequired>
-        <FormLabel htmlFor="firstName">Last Name</FormLabel>
+        <FormLabel htmlFor="lastName">Last Name</FormLabel>
         <NameInput
           name="lastName"
           variant="outline"
+          placeholder="Last name"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
         />
       </FormControl>
+      <br />
       <FormControl isRequired>
-        <FormLabel htmlFor="email">Email</FormLabel>
-        <EmailInput
-          name="email"
+        <FormLabel htmlFor="username">Username</FormLabel>
+        <NameInput
+          name="username"
           variant="outline"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
       </FormControl>
+      <br />
       <FormControl isRequired>
         <FormLabel htmlFor="email">Password</FormLabel>
         <PasswordInput
@@ -77,6 +81,7 @@ const RegisterForm = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </FormControl>
+      <br />
       <FormControl isRequired>
         <FormLabel htmlFor="email">Password Confirmation</FormLabel>
         <PasswordInput

@@ -1,4 +1,4 @@
-import { Center, Flex, Box, Heading, Text } from "@chakra-ui/react";
+import { Center, Flex, Box, Heading } from "@chakra-ui/react";
 import React from "react";
 
 import RegisterForm from "./RegisterForm";
@@ -17,7 +17,7 @@ const RegisterContainer = () => {
           <Box textAlign="center">
             <Heading>register</Heading>
           </Box>
-          <Box my={4} textAlign="left">
+          <Box my={4} textAlign="left" p="6">
             <RegisterForm />
           </Box>
         </Box>
